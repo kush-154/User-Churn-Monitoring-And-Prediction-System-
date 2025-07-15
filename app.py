@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import mysql.connector, pymysql
 
-conn = pymysql.connect(host="localhost", user="root", password="", db="churn_analysis")
+conn = pymysql.connect(host="127.0.0.1", user="root", password="", db="churn_analysis")
 cursor = conn.cursor()
 
 query_title = []
