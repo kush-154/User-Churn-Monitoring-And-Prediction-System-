@@ -4,7 +4,13 @@ import pandas as pd
 import numpy as np
 import mysql.connector, pymysql
 
-conn = pymysql.connect(host="mysql.railway.internal", user="root", password="FBVbMushTmfiNqjRakipulUriYzhgqhF", db="railway",port =3306)
+conn = pymysql.connect(
+    host=st.secrets["mysql"]["host"],
+    user=st.secrets["mysql"]["user"],
+    password=st.secrets["mysql"]["password"],
+    database=st.secrets["mysql"]["database"],
+    port=st.secrets["mysql"]["port"]
+)
 cursor = conn.cursor()
 
 query_title = []
