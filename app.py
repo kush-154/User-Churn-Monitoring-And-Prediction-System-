@@ -25,7 +25,7 @@ def initialize_db():
                     st.warning(f"SQL Error: {e}")
     conn.commit()
 
-initialize_db()
+
 def generate_fake_data_if_needed():
     with conn.cursor() as cursor:
         cursor.execute("SELECT COUNT(*) FROM customers")
@@ -38,7 +38,8 @@ def generate_fake_data_if_needed():
             st.success("Fake data inserted ✅")
         else:
             st.info("Fake data already exists — skipping generation.")
-
+            
+initialize_db()
 generate_fake_data_if_needed()
 
 
