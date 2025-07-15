@@ -54,7 +54,6 @@ st.title("User Churn Monitoring And Prediction System")
 with open("churn_reports.sql", "r") as file:
     raw_sql = file.read()
 
-# Split at each comment, which marks the start of a query
 raw_blocks = raw_sql.strip().split("--")
 
 for block in raw_blocks:
@@ -63,15 +62,15 @@ for block in raw_blocks:
         continue
 
     lines = block.splitlines()
-    title = lines[0].strip()  # first line = title
+    title = lines[0].strip()  
     sql_body = "\n".join(lines[1:]).strip()
 
-    # Only add if there's a valid SQL ending with a semicolon
+   
     if sql_body.endswith(";"):
         query_title.append(title)
         queries.append(sql_body)
 
-# Streamlit UI
+
 selected_query = st.multiselect("Select a query to run", query_title)
 
 for title in selected_query:
