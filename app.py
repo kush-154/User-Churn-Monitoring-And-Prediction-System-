@@ -40,7 +40,13 @@ def generate_fake_data_if_needed():
             st.info("Fake data already exists — skipping generation.")
             
 initialize_db()
-generate_fake_data_if_needed()
+
+if st.button("🔄 Generate Fake Data"):
+    try:
+        generate_fake_data_if_needed()
+    except Exception as e:
+        st.error(f"Error generating fake data: {e}")
+
 
 
 query_title = []
