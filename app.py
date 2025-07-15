@@ -32,8 +32,10 @@ def generate_fake_data_if_needed():
         count = cursor.fetchone()[0]
         if count == 0:
             st.write("Generating fake data...")
-           from generate_data import insert_fake_data
-            insert_fake_data(conn)
+            from generate_data import insert_fake_data
+insert_fake_data(conn)
+
+           
 
             st.success("Fake data inserted ✅")
         else:
