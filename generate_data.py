@@ -2,14 +2,16 @@ from faker import Faker
 import pymysql
 import random
 from datetime import datetime
+import streamlit as st
 
 fake = Faker()
 
 conn = pymysql.connect(
-    host='127.0.0.1',
-    user='root',
-    password='',
-    database='churn_analysis'
+    host=st.secrets["mysql"]["host"],
+    user=st.secrets["mysql"]["user"],
+    password=st.secrets["mysql"]["password"],
+    database=st.secrets["mysql"]["database"],
+    port=st.secrets["mysql"]["port"]
 )
 cursor = conn.cursor()
 
