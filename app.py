@@ -12,6 +12,7 @@ conn = pymysql.connect(
     database=st.secrets["mysql"]["database"],
     port=st.secrets["mysql"]["port"]
 )
+cursor = conn.cursor()
 def initialize_db():
     with open("schema.sql", "r") as f:
         sql = f.read()
@@ -39,7 +40,7 @@ def generate_fake_data_if_needed():
             st.info("Fake data already exists — skipping generation.")
 
 generate_fake_data_if_needed()
-cursor = conn.cursor()
+
 
 query_title = []
 queries = []
