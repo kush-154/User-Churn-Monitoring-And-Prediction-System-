@@ -3,6 +3,7 @@ import pickle
 import pandas as pd
 import numpy as np
 import mysql.connector, pymysql
+import os
 
 conn = pymysql.connect(
     host=st.secrets["mysql"]["host"],
@@ -11,6 +12,33 @@ conn = pymysql.connect(
     database=st.secrets["mysql"]["database"],
     port=st.secrets["mysql"]["port"]
 )
+def initialize_db():
+    with open("schema.sql", "r") as f:
+        sql = f.read()
+    with conn.cursor() as cursor:
+        for statement in sql.strip().split(";"):
+            if statement.strip():
+                try:
+                    cursor.execute(statement.strip())
+                except Exception as e:
+                    st.warning(f"SQL Error: {e}")
+    conn.commit()
+
+initialize_db()
+def generate_fake_data_if_needed():
+    with conn.cursor() as cursor:
+        cursor.execute("SELECT COUNT(*) FROM customers")
+        count = cursor.fetchone()[0]
+        if count == 0:
+            st.write("Generating fake data...")
+            with open("generate_data.py", "r") as f:
+                code = f.read()
+                exec(code, globals())
+            st.success("Fake data inserted ✅")
+        else:
+            st.info("Fake data already exists — skipping generation.")
+
+generate_fake_data_if_needed()
 cursor = conn.cursor()
 
 query_title = []
