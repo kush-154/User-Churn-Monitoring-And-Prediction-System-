@@ -3,5 +3,5 @@ pandas
 numpy
 pymysql
 mysql.connector
-sklearn
+scikit-learn
 faker
