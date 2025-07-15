@@ -5,9 +5,9 @@ def insert_fake_data(conn):
     fake = Faker()
     cursor = conn.cursor()
 
-    NUM_CUSTOMERS = 200  # Reduce from 500 to 200 for faster loading
+    NUM_CUSTOMERS = 200 
 
-    # --- 1. Customers ---
+    #1. Customers
     for i in range(1, NUM_CUSTOMERS + 1):
         name = fake.name()
         age = random.randint(18, 60)
@@ -18,7 +18,7 @@ def insert_fake_data(conn):
             VALUES (%s, %s, %s, %s, %s)
         """, (i, name, age, signup_date, is_churned))
 
-    # --- 2. Services ---
+    #2. Services
     service_types = ['Internet', 'Mobile', 'TV', 'Cloud', 'Banking']
     for i in range(1, NUM_CUSTOMERS + 1):
         service_type = random.choice(service_types)
@@ -28,7 +28,7 @@ def insert_fake_data(conn):
             VALUES (%s, %s, %s)
         """, (i, service_type, start_date))
 
-    # --- 3. Complaints ---
+    #3. Complaints
     complaint_types = ['Billing', 'Network', 'Support', 'Service', 'App']
     for _ in range(NUM_CUSTOMERS):
         cust_id = random.randint(1, NUM_CUSTOMERS)
@@ -39,7 +39,7 @@ def insert_fake_data(conn):
             VALUES (%s, %s, %s)
         """, (cust_id, complaint_type, complaint_date))
 
-    # --- 4. Feedbacks ---
+    #4. Feedbacks 
     for i in range(1, NUM_CUSTOMERS + 1):
         rating = random.randint(1, 5)
         cursor.execute("""
@@ -47,7 +47,7 @@ def insert_fake_data(conn):
             VALUES (%s, %s)
         """, (i, rating))
 
-    # --- 5. Usage ---
+    #5. Usage
     for i in range(1, NUM_CUSTOMERS + 1):
         month = random.randint(1, 12)
         usage_minutes = random.randint(300, 1500)
