@@ -33,10 +33,7 @@ def generate_fake_data_if_needed():
         if count == 0:
             st.write("Generating fake data...")
             from generate_data import insert_fake_data
-insert_fake_data(conn)
-
-           
-
+            insert_fake_data(conn)
             st.success("Fake data inserted ✅")
         else:
             st.info("Fake data already exists — skipping generation.")
